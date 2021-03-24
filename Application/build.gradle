@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'jacoco'
+}
+
+repositories {
+    jcenter()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'saveltaja.ui.Main'
+    }
+}
+
+application {
+    mainClass = 'saveltaja.ui.Main'
+}
+
+run {
+    standardInput = System.in
+}
