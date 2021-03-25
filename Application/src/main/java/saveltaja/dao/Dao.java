@@ -6,6 +6,6 @@ public interface Dao {
     
     List<String> readAll();
     
-    void writeNotes(List<String> notes);
+    boolean writeNotes(List<String> notes);
     
 }

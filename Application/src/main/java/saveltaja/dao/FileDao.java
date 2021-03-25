@@ -38,14 +38,19 @@ public class FileDao implements Dao {
                 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return read;
     }
     
     @Override
-    public void writeNotes(List<String> notes) {
-        File noteFile = createNewFile();
+    public boolean writeNotes(List<String> notes) {
+        return writeNotes(notes, "mun");
+    }
+    
+    public boolean writeNotes(List<String> notes, String fileName) {
+        File noteFile = createNewFile(fileName);
         
         try {
             FileWriter writer = new FileWriter(noteFile.getName());
@@ -59,17 +64,25 @@ public class FileDao implements Dao {
             writer.write("}");
             writer.close();
             
+            return true;
+            
         } catch (IOException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
     }
     
-    private File createNewFile() {
+    public void deleteFile(String fileName) {
+        File file = new File(fileName);
+        file.delete();
+    }
+    
+    private File createNewFile(String fileName) {
         try {
-            File noteFile = new File("test.ly");
+            File noteFile = new File(fileName);
             
             if (noteFile.createNewFile()) {
-                System.out.println("Noted can be found from " + noteFile.getName());
+                System.out.println("Notes can be found from " + noteFile.getName());
             } else {
                 System.out.println("File already exists.");
             }
