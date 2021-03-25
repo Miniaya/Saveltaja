@@ -26,9 +26,6 @@ public class Service {
     
     public void createNotes(int k, int duration) {
         createSubstrings(k);
-//        String[] array = {"A", ".B", "^C", "^C", "^D", "B", "A", ".G", "A", "A#", "B", "^C", "A", "Gb", "^G", "^G", "^D", "Ab", "A", "B#", "^C", "A", "^C", "^D", "B", "A"};
-//        ArrayList<String> list = new ArrayList(Arrays.asList(array));
-//        dao.writeNotes(translateForLilypond(list));
         List<String> melody = createMelody(k, duration);
         dao.writeNotes(melody);
     }
@@ -72,7 +69,7 @@ public class Service {
         return translateForLilypond(melody);
     }
     
-    public static <T> T mostCommon(List<T> list) {
+    private static <T> T mostCommon(List<T> list) {
         Map<T, Integer> map = new HashMap<>();
 
         for (T t : list) {
@@ -90,8 +87,6 @@ public class Service {
         return max.getKey();
     }
 
-
-    
     private List<String> translateForLilypond(List<String> tones) {
         ArrayList<String> translated = new ArrayList();
         

@@ -4,16 +4,20 @@
 	<module name= "TreeWalker">
 		<module name= "MethodLength">
 			<property name="tokens" value="METHOD_DEF"/>
-			<property name="max" value="15"/>
+			<property name="max" value="20"/>
 		</module>
 		<module name="NestedIfDepth"/>
 		<module name="NestedForDepth">
 			<property name="max" value="0"/>
 		</module>
 		<module name="Indentation"/>
+		<module name="RightCurly"/>
 		<module name="LeftCurly"/>
-		<module name="CyclomaticComplexity">
-			<property name="max" value="3"/>
+		<module name="LineLength">
+			<property name="max" value="120"/>
 		</module>
+		<module name="SingleSpaceSeparator"/>
+		<module name="WhitespaceAround"/>
+		<module name="UnusedImports"/>
 	</module>
 </module>
