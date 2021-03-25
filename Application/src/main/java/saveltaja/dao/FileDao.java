@@ -69,7 +69,7 @@ public class FileDao implements Dao {
             File noteFile = new File("test.ly");
             
             if (noteFile.createNewFile()) {
-                System.out.println("File created: " + noteFile.getName());
+                System.out.println("Noted can be found from " + noteFile.getName());
             } else {
                 System.out.println("File already exists.");
             }

@@ -7,13 +7,18 @@ import saveltaja.io.IO;
 public class CLUI {
     
     private Service service;
+    private IO io;
     
     public CLUI (IO io) {
         this.service = new Service(new FileDao("nuotit.csv"));
+        this.io = io;
     }
     
     public void init() {
-        service.createNotes(2);
+        int k = Integer.valueOf(io.readLine("Give the length of the Markov chain: "));
+        int duration = Integer.valueOf(io.readLine("Give the number of tones in melody: "));
+        
+        service.createNotes(k, duration);
     }
     
 }

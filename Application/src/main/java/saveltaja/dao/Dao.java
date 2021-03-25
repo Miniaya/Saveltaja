@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface Dao {
     
-    public List<String> readAll();
+    List<String> readAll();
     
-    public void writeNotes(List<String> notes);
+    void writeNotes(List<String> notes);
     
 }
