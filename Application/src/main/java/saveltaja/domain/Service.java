@@ -10,6 +10,9 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import saveltaja.dao.Dao;
 
+/**
+ * Provides tools needed to create a melody
+ */
 public class Service {
     
     private Dao dao;
@@ -28,10 +31,23 @@ public class Service {
         dao.writeNotes(melody);
     }
     
+    /**
+     * Gathers all notes provided in .csv file
+     * 
+     * @see saveltaja.dao.FileDao#readAll() 
+     * 
+     * @return list of notes saved to file
+     */
     private List<String> readAllNotes() {
         return dao.readAll();
     }
     
+    /**
+     * Creates a trie of substrings in the length of k from the list of notes.
+     * Also maps which tones come after a certain substring.
+     * 
+     * @param k  length of the substring provided by user
+     */
     private void createSubstrings(int k) {
         List<String> notes = readAllNotes();
         
@@ -46,6 +62,14 @@ public class Service {
         System.out.println(substrings.entrySet());
     }
     
+    /**
+     * Creates the melody using information provided in the trie
+     * 
+     * @param k length of the substring provided by user
+     * @param duration  number of tones in melody
+     * 
+     * @return Translated melody ready to put on file
+     */
     private List<String> createMelody(int k, int duration) {
         ArrayList<String> melody = new ArrayList();
         ArrayList<String> singleTones = new ArrayList(tones);
@@ -67,6 +91,14 @@ public class Service {
         return translateForLilypond(melody);
     }
     
+    /**
+     * Gets the most common tone from the list of tones
+     * 
+     * @param <T>   Generic value
+     * @param list  list of tones
+     * 
+     * @return most common tone on the list
+     */
     private static <T> T mostCommon(List<T> list) {
         Map<T, Integer> map = new HashMap<>();
 
@@ -85,6 +117,13 @@ public class Service {
         return max.getKey();
     }
 
+    /**
+     * Translates the tone format acceptable for .ly format
+     * 
+     * @param tones list of tones to be translated
+     * 
+     * @return list containing four translated notes on one element
+     */
     private List<String> translateForLilypond(List<String> tones) {
         ArrayList<String> translated = new ArrayList();
         StringBuilder bar = new StringBuilder();
@@ -108,6 +147,13 @@ public class Service {
         return translated;
     }
     
+    /**
+     * Replaces sharps with '-is' and flats with '-es'
+     * 
+     * @param tone  tone to be tarnslated
+     * 
+     * @return translated tone
+     */
     private StringBuilder replaceAccidentals(StringBuilder tone) {
         
         if (tone.indexOf("#") > 0) {
@@ -120,6 +166,13 @@ public class Service {
         return tone;
     }
     
+    /**
+     * Replaces Pitch markings to correct form
+     * 
+     * @param tone  to be translated
+     * 
+     * @return translated tone
+     */
     private StringBuilder replacePitches(StringBuilder tone) {
         
         if (tone.indexOf("^") >= 0) {

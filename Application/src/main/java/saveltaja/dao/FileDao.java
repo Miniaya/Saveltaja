@@ -11,6 +11,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Provides tools for reading and writing files
+ */
 public class FileDao implements Dao {
     
     private File file;
@@ -19,6 +22,11 @@ public class FileDao implements Dao {
         this.file = new File(fileName);
     }
     
+    /**
+     * Reads the notes from .csv file and saves them to a list
+     * 
+     * @return list of notes from the file
+     */
     @Override
     public List<String> readAll() {
         ArrayList<String> read = new ArrayList();
@@ -43,11 +51,26 @@ public class FileDao implements Dao {
         return read;
     }
     
+    /**
+     * writes the notes from list to a specific file
+     * 
+     * @param notes list of notes to be written
+     * 
+     * @return true whether the writing succeeded, false otherwise
+     */
     @Override
     public boolean writeNotes(List<String> notes) {
         return writeNotes(notes, "mun");
     }
     
+    /**
+     * writes the notes from list to a file specified
+     * 
+     * @param notes list of notes to be written
+     * @param fileName  name of the file 
+     * 
+     * @return  true whether the wirting succeded, false otherwise
+     */
     public boolean writeNotes(List<String> notes, String fileName) {
         File noteFile = createNewFile(fileName);
         
@@ -70,11 +93,23 @@ public class FileDao implements Dao {
         }
     }
     
+    /**
+     * deletes specified file from project root
+     * 
+     * @param fileName file to be deleted
+     */
     public void deleteFile(String fileName) {
         File file = new File(fileName);
         file.delete();
     }
     
+    /**
+     * creates new file in .ly format
+     * 
+     * @param fileName  name of the file
+     * 
+     * @return created file
+     */
     private File createNewFile(String fileName) {
         try {
             File noteFile = new File(fileName + ".ly");
