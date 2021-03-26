@@ -1,8 +1,9 @@
-# Saveltaja
-Helsingin Yliopistin tietorakenteet ja algoritmit -harjoitustyönä tehty säveltäjä
+# Säveltäjä / Composer
+Composer made for course Data structures and algorithms project in University of Helsinki
 
 ![GitHub Actions](https://github.com/Miniaya/Saveltaja/workflows/Java%20CI%20with%20Gradle/badge.svg)
 ![Codecov](https://codecov.io/gh/Miniaya/Saveltaja/branch/main/graph/badge.svg?token=03GHNVXW5A)
 
-## Viikkoraportit
-* [Viikko 1](https://github.com/Miniaya/Saveltaja/blob/main/dokumentaatio/viikkoraportti_1.md)
+## Weekly reports
+* [Week 1](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report_1.md)
+* [Week 2](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report_2.md)
