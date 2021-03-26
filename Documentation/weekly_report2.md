@@ -1,7 +1,7 @@
 # Weekly report 2
 ## What did I achieve this week?
 
-This week I searched some training data and made a rouch version of the whole program. Every push runs tests automatically (GitHub actions enabled), test coverage can be seen in README.md and some kind of checkstyle is enabled. I also translated the documentation to english, because I did not want to write the code in finnish.
+This week I searched some training data and made a rouch version of the whole program. Every push runs tests automatically (GitHub actions enabled), test coverage can be seen in ![README.md](https://github.com/Miniaya/Saveltaja/blob/main/README.md) and some kind of checkstyle is enabled. I also translated the documentation to english, because I did not want to write the code in finnish.
 
 ## Progress of the program
 
