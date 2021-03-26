@@ -10,7 +10,7 @@ public class CLUI {
     private IO io;
     
     public CLUI (IO io) {
-        this.service = new Service(new FileDao("nuotit.csv"));
+        this.service = new Service(new FileDao("notes.csv"));
         this.io = io;
     }
     
