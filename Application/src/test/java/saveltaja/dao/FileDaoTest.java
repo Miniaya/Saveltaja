@@ -50,6 +50,6 @@ public class FileDaoTest {
     public void writeNotesSucceed() {
         String[] array = {"A' Cis'' B' D", "F' Ees' Des' B"};
         ArrayList<String> toWrite = new ArrayList(Arrays.asList(array));
-        assertTrue(dao.writeNotes(toWrite, "test.ly"));
+        assertTrue(dao.writeNotes(toWrite, "test"));
     }
 }

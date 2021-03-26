@@ -1,11 +1,9 @@
 package saveltaja.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -89,44 +87,52 @@ public class Service {
 
     private List<String> translateForLilypond(List<String> tones) {
         ArrayList<String> translated = new ArrayList();
-        
         StringBuilder bar = new StringBuilder();
         
         for (int i = 0 ; i <= tones.size() ; i++) {
-            if (i != 0 && i % 4 == 0) {
-                translated.add(bar.toString().strip());
-                bar = new StringBuilder();
-            } else if (i == tones.size()) {
+            if (i == tones.size()) {
                 translated.add(bar.toString().strip());
                 break;
-            }
+            } else if (i != 0 && i % 4 == 0) {
+                translated.add(bar.toString().strip());
+                bar = new StringBuilder();
+            } 
             
             StringBuilder temp = new StringBuilder();
-            temp.append(tones.get(i).toLowerCase());
+            temp.append(tones.get(i));
+            temp = replaceAccidentals(replacePitches(temp));
             
-            if (temp.indexOf("^") >= 0) {
-                temp.replace(0, 1, "");
-                temp.append("''");
-                
-            } else if (temp.indexOf(".") >= 0) {
-                temp.replace(0, 1, "");
-                
-            } else {
-                temp.append("'");
-            }
-            
-            if (temp.indexOf("#") > 0) {
-                temp.replace(1, 2, "is");
-                
-            } else if (temp.indexOf("b") > 0) {
-                temp.replace(1, 2, "es");
-            }
-            
-            bar.append(temp);
-            bar.append(" ");
-            
+            bar.append(temp.toString().toLowerCase() + " ");
         }
         
         return translated;
+    }
+    
+    private StringBuilder replaceAccidentals(StringBuilder tone) {
+        
+        if (tone.indexOf("#") > 0) {
+            tone.replace(1, 2, "is");
+            
+        } else if (tone.indexOf("b") > 0) {
+            tone.replace(1, 2, "es");
+        }
+        
+        return tone;
+    }
+    
+    private StringBuilder replacePitches(StringBuilder tone) {
+        
+        if (tone.indexOf("^") >= 0) {
+            tone.replace(0, 1, "");
+            tone.append("''");
+                
+        } else if (tone.indexOf(".") >= 0) {
+            tone.replace(0, 1, "");
+                
+        } else {
+            tone.append("'");
+        }
+        
+        return tone;
     }
 }

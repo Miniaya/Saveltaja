@@ -25,7 +25,6 @@ public class FileDao implements Dao {
         
         try {
             Scanner reader = new Scanner(file);
-                
             while(reader.hasNextLine()) {
                 String[] splitLine = reader.nextLine().split(";");
                 
@@ -35,7 +34,7 @@ public class FileDao implements Dao {
                 
                 read.addAll(Arrays.asList(splitLine));
             }
-                
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
@@ -54,8 +53,7 @@ public class FileDao implements Dao {
         
         try {
             FileWriter writer = new FileWriter(noteFile.getName());
-            writer.write("\\version \"2.18.2\"\n");
-            writer.write("{\n");
+            writer.write("\\version \"2.18.2\"\n{\n");
             
             for (int i = 0 ; i < notes.size() ; i++) {
                 writer.write("  " + notes.get(i) + "\n");
@@ -79,7 +77,7 @@ public class FileDao implements Dao {
     
     private File createNewFile(String fileName) {
         try {
-            File noteFile = new File(fileName);
+            File noteFile = new File(fileName + ".ly");
             
             if (noteFile.createNewFile()) {
                 System.out.println("Notes can be found from " + noteFile.getName());
