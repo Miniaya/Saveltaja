@@ -11,9 +11,11 @@ import saveltaja.dao.InMemoryDao;
 public class ServiceTest {
     
     private Service s;
+    private InMemoryDao dao;
     
     public ServiceTest() {
-        s = new Service(new InMemoryDao());
+        dao = new InMemoryDao();
+        s = new Service(dao);
     }
     
     @BeforeClass
@@ -33,7 +35,9 @@ public class ServiceTest {
     }
     
     @Test
-    public void mmm() {
-        
+    public void durationIsCorrect() {
+        s.createNotes(2, 6);
+        int len = dao.readWritten().get(0).split(" ").length + dao.readWritten().get(1).split(" ").length;
+        assertEquals(6, len);
     }
 }

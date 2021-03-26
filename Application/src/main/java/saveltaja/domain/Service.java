@@ -32,24 +32,13 @@ public class Service {
     }
     
     /**
-     * Gathers all notes provided in .csv file
-     * 
-     * @see saveltaja.dao.FileDao#readAll() 
-     * 
-     * @return list of notes saved to file
-     */
-    private List<String> readAllNotes() {
-        return dao.readAll();
-    }
-    
-    /**
      * Creates a trie of substrings in the length of k from the list of notes.
      * Also maps which tones come after a certain substring.
      * 
      * @param k  length of the substring provided by user
      */
     private void createSubstrings(int k) {
-        List<String> notes = readAllNotes();
+        List<String> notes = dao.readAll();
         
         for (int i = k - 1 ; i < notes.size() - 1 ; i++) {
             String substring = String.join("", notes.subList(i - k + 1, i + 1));
