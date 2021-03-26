@@ -4,6 +4,12 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'Application/**'
+       
+defaults:
+  run:
+    working-directory: Application
 
 jobs:
   run_tests:
