@@ -5,5 +5,5 @@ Composer made for course Data structures and algorithms project in University of
 ![Codecov](https://codecov.io/gh/Miniaya/Saveltaja/branch/main/graph/badge.svg?token=03GHNVXW5A)
 
 ## Weekly reports
-* [Week 1](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report_1.md)
-* [Week 2](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report_2.md)
+* [Week 1](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report1.md)
+* [Week 2](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report2.md)
