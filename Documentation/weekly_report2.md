@@ -17,7 +17,7 @@ I had some problems with checkstyle, but it is now working correctly. I also not
 
 ## What next?
 
-Next I should find more notes for my training data. I could also expand the algorithm so that it can also decide the duration of the note based on training data and start doing my own data structures.
+Next I should find more notes for my training data. I could also expand the algorithm so that it can also decide the duration of the note based on training data and start doing my own data structures. It would also be cool if I found a way to export the notes automatically to pdf form (should not be too hard) and some way to play the song after it is created.
 
 ### Used hours
 
