@@ -36,7 +36,7 @@ public class FileDaoTest {
 
     @Test
     public void readAllGetsAllNotesFromFile() {
-        String[] correct = {"A","B",".C","E#","^D","G","^F","^D#","D","^C","Bb","^D#","^D","Eb",".B","^C",".A","F","G#"};
+        String[] correct = {"A4","B4",".C8","E#8","^D2","G4","^F4","^D#8","D8","^C4","Bb8","^D#4","^D2","Eb2",".B4","^C4",".A8","F8","G#2"};
         assertEquals(correct, dao.readAll().toArray());
     }
     
@@ -48,7 +48,7 @@ public class FileDaoTest {
     
     @Test
     public void writeNotesSucceed() {
-        String[] array = {"A' Cis'' B' D", "F' Ees' Des' B"};
+        String[] array = {"A'4 Cis''8 B'8 D4", "F'2 Ees'4 Des'4 B2"};
         ArrayList<String> toWrite = new ArrayList(Arrays.asList(array));
         assertTrue(dao.writeNotes(toWrite, "test"));
     }

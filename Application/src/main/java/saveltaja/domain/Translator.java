@@ -25,9 +25,11 @@ public class Translator {
                 bar = new StringBuilder();
             } 
             
-            StringBuilder temp = new StringBuilder();
-            temp.append(tones.get(i));
+            StringBuilder temp = new StringBuilder(tones.get(i));
+            char duration = temp.charAt(temp.length() - 1);
+            temp.deleteCharAt(temp.length() - 1);
             temp = replaceAccidentals(replacePitches(temp));
+            temp.append(duration);
             
             bar.append(temp.toString().toLowerCase() + " ");
         }

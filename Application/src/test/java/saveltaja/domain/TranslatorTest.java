@@ -28,7 +28,7 @@ public class TranslatorTest {
     
     @Before
     public void setUp() {
-        String[] array = {".A", "Bb", "^C#", ".Db", "Eb", "^F", ".G#", "^B"};
+        String[] array = {".A4", "Bb8", "^C#8", ".Db4", "Eb8", "^F2", ".G#4", "^B2"};
         translated = translator.translate(Arrays.asList(array));
     }
     
@@ -51,20 +51,20 @@ public class TranslatorTest {
     
     @Test
     public void translatesFlatsRight() {
-        assertEquals("bes'", translated.get(0).split(" ")[1]);
+        assertEquals("bes'8", translated.get(0).split(" ")[1]);
     }
     
     @Test
     public void translatesSharpsRight() {
-        assertEquals("cis''", translated.get(0).split(" ")[2]);
+        assertEquals("cis''8", translated.get(0).split(" ")[2]);
     }
     
     @Test
     public void translatesPitchesRight() {
         String[] tones = translated.get(1).split(" ");
         
-        assertEquals("ees'", tones[0]);
-        assertEquals("f''", tones[1]);
-        assertEquals("gis", tones[2]);
+        assertEquals("ees'8", tones[0]);
+        assertEquals("f''2", tones[1]);
+        assertEquals("gis4", tones[2]);
     }
 }

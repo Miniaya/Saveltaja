@@ -47,8 +47,6 @@ public class Service {
             substrings.get(substring).add(notes.get(i + 1));
         }
         
-        System.out.println(substrings.keySet());
-        System.out.println(substrings.entrySet());
     }
     
     /**
