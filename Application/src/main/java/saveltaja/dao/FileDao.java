@@ -1,11 +1,9 @@
 package saveltaja.dao;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -92,14 +90,7 @@ public class FileDao implements Dao {
                 null, 
                 new File(noteFile.getAbsoluteFile().getParent()));
             
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }   
-            
             return true;
-            
         } catch (IOException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
