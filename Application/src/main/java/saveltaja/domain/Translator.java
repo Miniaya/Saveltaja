@@ -26,14 +26,15 @@ public class Translator {
             } 
             
             StringBuilder temp = new StringBuilder(tones.get(i));
-            char duration = temp.charAt(temp.length() - 1);
-            temp.deleteCharAt(temp.length() - 1);
-            temp = replaceAccidentals(replacePitches(temp));
-            temp.append(duration);
+            if (temp.charAt(0) != 'R') {
+                char duration = temp.charAt(temp.length() - 1);
+                temp.deleteCharAt(temp.length() - 1);
+                temp = replaceAccidentals(replacePitches(temp));
+                temp.append(duration);
+            }
             
             bar.append(temp.toString().toLowerCase() + " ");
         }
-        
         return translated;
     }
     
