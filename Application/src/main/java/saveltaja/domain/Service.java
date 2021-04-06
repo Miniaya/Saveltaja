@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.TreeMap;
 import saveltaja.dao.Dao;
 
@@ -69,8 +70,9 @@ public class Service {
         for (int i = k - 1 ; i < duration - 1 ; i++) {
             String substring = String.join("", melody.subList(i - k + 1, i + 1));
             List<String> nextTones = substrings.floorEntry(substring).getValue();
+            Random r = new Random();
             
-            melody.add(mostCommon(nextTones));
+            melody.add(nextTones.get(r.nextInt(nextTones.size())));
         }
         
         Translator translator = new Translator();
