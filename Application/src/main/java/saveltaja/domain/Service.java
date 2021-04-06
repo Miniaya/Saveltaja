@@ -1,12 +1,7 @@
 package saveltaja.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.TreeMap;
 import saveltaja.dao.Dao;
@@ -17,7 +12,7 @@ import saveltaja.dao.Dao;
 public class Service {
     
     private Dao dao;
-    private TreeMap<String, List<String>> substrings;
+    private TreeMap<String, List> substrings;
     private HashSet<String> tones;
     
     public Service(Dao dao) {
@@ -28,7 +23,7 @@ public class Service {
     
     public void createNotes(int k, int duration) {
         createSubstrings(k);
-        List<String> melody = createMelody(k, duration);
+        List melody = createMelody(k, duration);
         dao.writeNotes(melody);
     }
     
@@ -39,12 +34,12 @@ public class Service {
      * @param k  length of the substring provided by user
      */
     private void createSubstrings(int k) {
-        List<String> notes = dao.readAll();
+        List notes = dao.readAll();
         
-        for (int i = k - 1 ; i < notes.size() - 1 ; i++) {
+        for (int i = k - 1 ; i < notes.length() - 1 ; i++) {
             String substring = String.join("", notes.subList(i - k + 1, i + 1));
             tones.add(notes.get(i));
-            substrings.putIfAbsent(substring, new ArrayList());
+            substrings.putIfAbsent(substring, new List());
             substrings.get(substring).add(notes.get(i + 1));
         }
         
@@ -58,52 +53,26 @@ public class Service {
      * 
      * @return Translated melody ready to put on file
      */
-    private List<String> createMelody(int k, int duration) {
-        ArrayList<String> melody = new ArrayList();
-        ArrayList<String> singleTones = new ArrayList(tones);
+    private List createMelody(int k, int duration) {
+        List melody = new List();
+        List singleTones = new List(Arrays.stream(tones.toArray()).toArray(String[]::new));
         
         for (int i = 0 ; i < k ; i++) {
-            Collections.shuffle(singleTones);
-            melody.add(singleTones.get(0));
+            
+            melody.add(singleTones.getRandom());
         }
         
         for (int i = k - 1 ; i < duration - 1 ; i++) {
             String substring = String.join("", melody.subList(i - k + 1, i + 1));
-            List<String> nextTones = substrings.floorEntry(substring).getValue();
+            List nextTones = substrings.floorEntry(substring).getValue();
             Random r = new Random();
             
-            melody.add(nextTones.get(r.nextInt(nextTones.size())));
+            melody.add(nextTones.get(r.nextInt(nextTones.length())));
         }
         
         Translator translator = new Translator();
         
         return translator.translate(melody);
-    }
-    
-    /**
-     * Gets the most common tone from the list of tones
-     * 
-     * @param <T>   Generic value
-     * @param list  list of tones
-     * 
-     * @return most common tone on the list
-     */
-    private static <T> T mostCommon(List<T> list) {
-        Map<T, Integer> map = new HashMap<>();
-
-        for (T t : list) {
-            Integer val = map.get(t);
-            map.put(t, val == null ? 1 : val + 1);
-        }
-
-        Entry<T, Integer> max = null;
-
-        for (Entry<T, Integer> e : map.entrySet()) {
-            if (max == null || e.getValue() > max.getValue())
-                max = e;
-        }
-
-        return max.getKey();
     }
 
 }

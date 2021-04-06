@@ -1,7 +1,5 @@
 package saveltaja.domain;
 
-import java.util.Arrays;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,7 +10,7 @@ import static org.junit.Assert.*;
 public class TranslatorTest {
     
     private Translator translator;
-    private List<String> translated;
+    private List translated;
     
     public TranslatorTest() {
         translator = new Translator();
@@ -29,7 +27,7 @@ public class TranslatorTest {
     @Before
     public void setUp() {
         String[] array = {".A4", "Bb8", "^C#8", ".Db4", "Eb8", "^F2", ".G#4", "^B2"};
-        translated = translator.translate(Arrays.asList(array));
+        translated = translator.translate(new List(array));
     }
     
     @After
@@ -44,7 +42,7 @@ public class TranslatorTest {
     @Test
     public void returnsCorrectNumberOfNotes() {
         String[] array = {".A", "Bb"};
-        List<String> tr = translator.translate(Arrays.asList(array));
+        List tr = translator.translate(new List(array));
         
         assertEquals(2, tr.get(0).split(" ").length);
     }

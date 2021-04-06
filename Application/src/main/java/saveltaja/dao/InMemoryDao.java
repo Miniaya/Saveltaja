@@ -1,31 +1,29 @@
 package saveltaja.dao;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import saveltaja.domain.List;
 
 public class InMemoryDao implements Dao {
     
-    private ArrayList<String> notes;
-    private List<String> written;
+    private List notes;
+    private List written;
     
     public InMemoryDao() {
         String[] array = {"A","B",".C","E#","^D","G","^F","^D#","D","^C","Bb","^D#","^D","Eb",".B","^C",".A","F","G#"};
-        notes = new ArrayList(Arrays.asList(array));
+        notes = new List(array);
     }
     
     @Override
-    public List<String> readAll() {
+    public List readAll() {
         return notes;
     }
     
     @Override
-    public boolean writeNotes(List<String> notes) {
+    public boolean writeNotes(List notes) {
         written = notes;
         return true;
     }
     
-    public List<String> readWritten() {
+    public List readWritten() {
         return written;
     }
     

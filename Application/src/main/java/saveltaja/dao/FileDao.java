@@ -6,12 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import saveltaja.domain.List;
 
 /**
  * Provides tools for reading and writing files
@@ -30,8 +28,8 @@ public class FileDao implements Dao {
      * @return list of notes from the file
      */
     @Override
-    public List<String> readAll() {
-        ArrayList<String> read = new ArrayList();
+    public List readAll() {
+        List read = new List();
         
         try {
             Scanner reader = new Scanner(file);
@@ -42,7 +40,7 @@ public class FileDao implements Dao {
                     continue;
                 }
                 
-                read.addAll(Arrays.asList(splitLine));
+                read.addAll(splitLine);
             }
             
         } catch (FileNotFoundException ex) {
@@ -61,7 +59,7 @@ public class FileDao implements Dao {
      * @return true whether the writing succeeded, false otherwise
      */
     @Override
-    public boolean writeNotes(List<String> notes) {
+    public boolean writeNotes(List notes) {
         return writeNotes(notes, "mun");
     }
     
@@ -73,14 +71,14 @@ public class FileDao implements Dao {
      * 
      * @return  true whether the writing succeded, false otherwise
      */
-    public boolean writeNotes(List<String> notes, String fileName) {
+    public boolean writeNotes(List notes, String fileName) {
         File noteFile = createNewFile(fileName);
         
         try {
             FileWriter writer = new FileWriter(noteFile.getName());
             writer.write("\\version \"2.18.2\"\n{\n");
             
-            for (int i = 0 ; i < notes.size() ; i++) {
+            for (int i = 0 ; i < notes.length() ; i++) {
                 writer.write("  " + notes.get(i) + "\n");
             }
             

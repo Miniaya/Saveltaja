@@ -1,13 +1,12 @@
 package saveltaja.dao;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import saveltaja.domain.List;
 
 public class FileDaoTest {
     
@@ -36,8 +35,8 @@ public class FileDaoTest {
 
     @Test
     public void readAllGetsAllNotesFromFile() {
-        String[] correct = {"A4","B4",".C8","E#8","^D2","G4","^F4","^D#8","D8","^C4","Bb8","^D#4","^D2","Eb2",".B4","^C4",".A8","F8","G#2"};
-        assertEquals(correct, dao.readAll().toArray());
+        List read = dao.readAll();
+        assertEquals(19, read.length());
     }
     
     @Test
@@ -49,7 +48,7 @@ public class FileDaoTest {
     @Test
     public void writeNotesSucceed() {
         String[] array = {"A'4 Cis''8 B'8 D4", "F'2 Ees'4 Des'4 B2"};
-        ArrayList<String> toWrite = new ArrayList(Arrays.asList(array));
+        List toWrite = new List(array);
         assertTrue(dao.writeNotes(toWrite, "test"));
     }
 }

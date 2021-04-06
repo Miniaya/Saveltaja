@@ -60,9 +60,28 @@ public class ListTest {
     }
     
     @Test
+    public void getThrowsExceptionWhenListIsEmpty() {
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(0));
+    }
+    
+    @Test
+    public void getThrowsExceptionWhenIndexOutOfBounds() {
+        list.addAll(array);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> list.get(3));
+    }
+    
+    @Test
     public void addAllAddsAllItems() {
         list.addAll(array);
         assertEquals(3, list.length());
+    }
+    
+    @Test
+    public void subListReturnsCorrectArray() {
+        list.addAll(array);
+        String[] sub = list.subList(0, 2);
+        String[] correct = {"moi", "hei"};
+        assertEquals(correct, sub);
     }
     
 }

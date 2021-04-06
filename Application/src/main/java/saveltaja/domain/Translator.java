@@ -1,8 +1,5 @@
 package saveltaja.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Translator {
     
     /**
@@ -12,12 +9,12 @@ public class Translator {
      * 
      * @return list containing four translated notes on one element
      */
-    public List<String> translate(List<String> tones) {
-        ArrayList<String> translated = new ArrayList();
+    public List translate(List tones) {
+        List translated = new List();
         StringBuilder bar = new StringBuilder();
         
-        for (int i = 0 ; i <= tones.size() ; i++) {
-            if (i == tones.size()) {
+        for (int i = 0 ; i <= tones.length() ; i++) {
+            if (i == tones.length()) {
                 translated.add(bar.toString().strip());
                 break;
             } else if (i != 0 && i % 4 == 0) {

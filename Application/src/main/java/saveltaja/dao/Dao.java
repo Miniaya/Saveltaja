@@ -1,11 +1,11 @@
 package saveltaja.dao;
 
-import java.util.List;
+import saveltaja.domain.List;
 
 public interface Dao {
     
-    List<String> readAll();
+    List readAll();
     
-    boolean writeNotes(List<String> notes);
+    boolean writeNotes(List notes);
     
 }
