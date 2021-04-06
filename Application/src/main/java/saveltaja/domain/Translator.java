@@ -27,8 +27,13 @@ public class Translator {
             
             StringBuilder temp = new StringBuilder(tones.get(i));
             if (temp.charAt(0) != 'R') {
-                char duration = temp.charAt(temp.length() - 1);
-                temp.deleteCharAt(temp.length() - 1);
+                StringBuilder duration = new StringBuilder();
+                if (temp.charAt(temp.length() - 1) == '.') {
+                    duration.append(temp.substring(temp.length() - 2));
+                } else {
+                    duration.append(temp.charAt(temp.length() - 1));
+                }
+                temp.delete(temp.length() - duration.length(), temp.length());
                 temp = replaceAccidentals(replacePitches(temp));
                 temp.append(duration);
             }
@@ -66,13 +71,16 @@ public class Translator {
      */
     private StringBuilder replacePitches(StringBuilder tone) {
         
-        if (tone.indexOf("^") >= 0) {
+        if (tone.charAt(0) == '^') {
             tone.replace(0, 1, "");
             tone.append("''");
                 
-        } else if (tone.indexOf(".") >= 0) {
+        } else if (tone.charAt(0) == '.') {
             tone.replace(0, 1, "");
                 
+        } else if (tone.charAt(0) == '*') {
+            tone.replace(0, 1, "");
+            tone.append("'''");
         } else {
             tone.append("'");
         }
