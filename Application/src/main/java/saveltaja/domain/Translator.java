@@ -27,12 +27,7 @@ public class Translator {
             
             StringBuilder temp = new StringBuilder(tones.get(i));
             if (temp.charAt(0) != 'R') {
-                StringBuilder duration = new StringBuilder();
-                if (temp.charAt(temp.length() - 1) == '.') {
-                    duration.append(temp.substring(temp.length() - 2));
-                } else {
-                    duration.append(temp.charAt(temp.length() - 1));
-                }
+                StringBuilder duration = separateDuration(temp);
                 temp.delete(temp.length() - duration.length(), temp.length());
                 temp = replaceAccidentals(replacePitches(temp));
                 temp.append(duration);
@@ -41,6 +36,18 @@ public class Translator {
             bar.append(temp.toString().toLowerCase() + " ");
         }
         return translated;
+    }
+    
+    private StringBuilder separateDuration(StringBuilder tone) {
+        StringBuilder duration = new StringBuilder();
+        
+        if (tone.charAt(tone.length() - 1) == '.') {
+            duration.append(tone.substring(tone.length() - 2));
+        } else {
+            duration.append(tone.charAt(tone.length() - 1));
+        }
+        
+        return duration;
     }
     
     /**
