@@ -15,6 +15,14 @@ public class CLUI {
     }
     
     public void init() {
+        io.print(
+            "----------------------------------------------------- \n" +
+            "--()------  _   __  _  _ __   __  __   __  __  ------ \n" +
+            "--/|_----- |   |  | |\\/| |_| |  | |_  |_  |__| ------ \n" +
+            "-(_|_)---- |_  |__| |  | |   |__| __| |__ | \\  ------ \n" +
+            "---J------------------------------------------------- \n"
+        );
+        
         int k = Integer.valueOf(io.readLine("Give the length of the Markov chain: "));
         int duration = Integer.valueOf(io.readLine("Give the number of tones in melody: "));
         
