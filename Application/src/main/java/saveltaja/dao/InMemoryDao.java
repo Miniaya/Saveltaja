@@ -2,6 +2,9 @@ package saveltaja.dao;
 
 import saveltaja.domain.List;
 
+/**
+ * This class is purely for testing purposes
+ */
 public class InMemoryDao implements Dao {
     
     private List notes;

@@ -35,6 +35,13 @@ public class Translator {
         return translated;
     }
     
+    /**
+     * Separates the duration of the note (number and dot) from the note itself
+     * 
+     * @param tone where the duration will be separated
+     * 
+     * @return duration of the note in number form (and with dot)
+     */
     private StringBuilder separateDuration(StringBuilder tone) {
         StringBuilder duration = new StringBuilder();
         
