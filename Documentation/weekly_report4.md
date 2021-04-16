@@ -1,4 +1,4 @@
-# Weekly report 3
+# Weekly report 4
 ## What did I achieve this week?
 
 I was a little busy during the week, so the project did not proceed as I intended. However, I managed to start coding the trie. It is far from done, but the first version works with the test inputs. I also started writing implementation and testing documents. I will be writing more detailed versions of them within coming weeks.
