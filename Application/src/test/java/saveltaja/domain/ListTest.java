@@ -84,4 +84,60 @@ public class ListTest {
         assertEquals(correct, sub);
     }
     
+    @Test
+    public void randomItemIsFromList() {
+        list.addAll(array);
+        String random = list.getRandom();
+        boolean found = false;
+        
+        for (String a : array) {
+            if (a.equals(random)) {
+                found = true;
+            }
+        }
+        
+        assertTrue(found);
+    }
+    
+    @Test
+    public void equalsRecognizesSameLists() {
+        list.addAll(array);
+        List another = new List(array);
+        assertEquals(list, another);
+    }
+    
+    @Test
+    public void listsWithSameLengthNotEqual() {
+        list.addAll(array);
+        String[] anotherArray = {"moi", "hei", "hei"};
+        List another = new List(anotherArray);
+        assertNotEquals(list, another);
+    }
+    
+    @Test
+    public void shorterListNotEqual() {
+        list.addAll(array);
+        String[] anotherArray = {"moi", "hei"};
+        List another = new List(anotherArray);
+        assertNotEquals(list, another);
+    }
+    
+    @Test
+    public void longerListNotEqual() {
+        list.addAll(array);
+        String[] anotherArray = {"moi", "hei", "terve", "hellurei"};
+        List another = new List(anotherArray);
+        assertNotEquals(list, another);
+    }
+    
+    @Test
+    public void emptyListNotNull() {
+        assertFalse(list.equals(null));
+    }
+    
+    @Test
+    public void listAndArrayNotEqual() {
+        list.addAll(array);
+        assertNotEquals(list, array);
+    }
 }

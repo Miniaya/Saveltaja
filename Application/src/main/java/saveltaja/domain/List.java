@@ -152,8 +152,13 @@ public class List {
             return false;
         }
         final List other = (List) obj;
-        if (!Arrays.deepEquals(this.array, other.array)) {
+        if (other.length() < index || other.length() > index) {
             return false;
+        }
+        for (int i = 0 ; i < other.length() ; i++) {
+            if (!other.get(i).equals(array[i])) {
+                return false;
+            }
         }
         return true;
     }
