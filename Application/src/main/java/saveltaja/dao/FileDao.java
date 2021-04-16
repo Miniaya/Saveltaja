@@ -85,7 +85,9 @@ public class FileDao implements Dao {
             writer.write("}");
             writer.close();
             
-            createPdf(noteFile);
+            exportToPdf(noteFile);
+            exportToMusicXML(noteFile);
+            openMuseScore(noteFile);
             
             return true;
         } catch (IOException ex) {
@@ -101,7 +103,7 @@ public class FileDao implements Dao {
      * 
      * @return true, if PDF is created
      */
-    private boolean createPdf(File noteFile) {
+    private boolean exportToPdf(File noteFile) {
         try {
             Process process = Runtime.getRuntime().exec(
                     new String[]{"sh", "-c", "lilypond --pdf " + noteFile.getName()},
@@ -109,13 +111,46 @@ public class FileDao implements Dao {
                     new File(noteFile.getAbsoluteFile().getParent()));
             
             printResults(process);
-            File pdf = new File(noteFile.getName() + ".pdf");
+            File pdf = new File(noteFile.getName().split("ly")[0] + "pdf");
             
             return pdf.exists();
             
         } catch (IOException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+    }
+    
+    private boolean exportToMusicXML(File noteFile) {
+        try {
+            File musicxml = new File(noteFile.getName().split("ly")[0] + "musicxml");
+            Process process = Runtime.getRuntime().exec(
+                    new String[]{"sh", "-c", "ly musicxml " + noteFile.getName() + " > " + musicxml.getName()},
+                    null,
+                    new File(noteFile.getAbsoluteFile().getParent()));
+            
+            printResults(process);
+            
+            return musicxml.exists();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
+    private void openMuseScore(File noteFile) {
+        try {
+            Process process = Runtime.getRuntime().exec(
+                    new String[]{"sh", "-c", "xdg-open " + noteFile.getName().split("ly")[0] + "musicxml"},
+                    null,
+                    new File(noteFile.getAbsoluteFile().getParent()));
+            
+            printResults(process);
+            File musicxml = new File(noteFile.getName().split("ly")[0] + "musicxml");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -126,11 +161,16 @@ public class FileDao implements Dao {
      * 
      * @throws IOException 
      */
-    private static void printResults(Process process) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line = "";
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
+    private static void printResults(Process process) {
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            
+        } catch (IOException ex) {
+            Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
