@@ -16,6 +16,11 @@ public class InMemoryDao implements Dao {
     }
     
     @Override
+    public void setChoices(boolean[] choices) {
+        
+    }
+    
+    @Override
     public List readAll() {
         return notes;
     }

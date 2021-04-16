@@ -8,4 +8,6 @@ public interface Dao {
     
     boolean writeNotes(List notes);
     
+    void setChoices(boolean[] choices);
+    
 }

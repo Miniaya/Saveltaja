@@ -21,6 +21,10 @@ public class Service {
         this.tones = new HashSet();
     }
     
+    public void setChoices(boolean[] choices) {
+        dao.setChoices(choices);
+    }
+    
     public void createNotes(int k, int duration) {
         createSubstrings(k);
         List melody = createMelody(k, duration);

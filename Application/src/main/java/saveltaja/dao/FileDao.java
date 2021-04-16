@@ -17,9 +17,16 @@ import saveltaja.domain.List;
 public class FileDao implements Dao {
     
     private File file;
+    private boolean[] choices;
     
     public FileDao (String fileName) {
         this.file = new File(fileName);
+        this.choices = new boolean[3];
+    }
+    
+    @Override
+    public void setChoices(boolean[] choices) {
+        this.choices = choices;
     }
     
     /**
@@ -85,14 +92,26 @@ public class FileDao implements Dao {
             writer.write("}");
             writer.close();
             
-            exportToPdf(noteFile);
-            exportToMusicXML(noteFile);
-            openMuseScore(noteFile);
+            checkChoices(noteFile);
             
             return true;
         } catch (IOException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+    }
+    
+    private void checkChoices(File noteFile) {
+        if (this.choices[0]) {
+            exportToPdf(noteFile);
+        }
+            
+        if (this.choices[1]) {
+            exportToMusicXML(noteFile);
+        }
+            
+        if (this.choices[2]) {
+            openMuseScore(noteFile);
         }
     }
     
