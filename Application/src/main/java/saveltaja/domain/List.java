@@ -3,7 +3,7 @@ package saveltaja.domain;
 import java.util.Arrays;
 
 /**
- * Provides the list tool where the notes are stored. Also provides tool for
+ * Provides the list data structure where the notes are stored. Also provides tool for
  * handling the list and items in the list.
  */
 public class List {
@@ -126,13 +126,6 @@ public class List {
         return this.array[i];
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Arrays.deepHashCode(this.array);
-        return hash;
-    }
-
     /**
      * Checks if the lists are the same
      * 
@@ -161,5 +154,13 @@ public class List {
             }
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + Arrays.deepHashCode(this.array);
+        hash = 83 * hash + this.index;
+        return hash;
     }
 }

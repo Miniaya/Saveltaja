@@ -24,6 +24,12 @@ public class FileDao implements Dao {
         this.choices = new boolean[3];
     }
     
+    /**
+     * Sets the choice array. Contains information of whether the user wants
+     * to export file to PDF or MUSICXML form or the user wants to open MuseScore
+     * 
+     * @param choices choices made by the user
+     */
     @Override
     public void setChoices(boolean[] choices) {
         this.choices = choices;
@@ -101,6 +107,11 @@ public class FileDao implements Dao {
         }
     }
     
+    /**
+     * Checks the choices user made and acts appropriating these choices.
+     * 
+     * @param noteFile file to be exported or opened
+     */
     private void checkChoices(File noteFile) {
         if (this.choices[0]) {
             exportToPdf(noteFile);
@@ -140,6 +151,13 @@ public class FileDao implements Dao {
         }
     }
     
+    /**
+     * Creates a MUSICXML file from given LY file
+     * 
+     * @param noteFile file to be converted
+     * 
+     * @return true, if MUSICXML is created
+     */
     private boolean exportToMusicXML(File noteFile) {
         try {
             File musicxml = new File(noteFile.getName().split("ly")[0] + "musicxml");
@@ -158,6 +176,11 @@ public class FileDao implements Dao {
         }
     }
     
+    /**
+     * Opens the MuseScore application with given file
+     * 
+     * @param noteFile file to be opened
+     */
     private void openMuseScore(File noteFile) {
         try {
             Process process = Runtime.getRuntime().exec(

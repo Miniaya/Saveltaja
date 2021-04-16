@@ -21,6 +21,11 @@ public class Service {
         this.tones = new HashSet();
     }
     
+    /**
+     * @see saveltaja.dao.FileDao setChoices
+     * 
+     * @param choices choices made by user
+     */
     public void setChoices(boolean[] choices) {
         dao.setChoices(choices);
     }

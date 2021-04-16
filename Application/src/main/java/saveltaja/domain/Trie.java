@@ -2,6 +2,10 @@ package saveltaja.domain;
 
 import java.util.HashMap;
 
+/**
+ * Provides a Trie data structure for storing the substrings of the melody.
+ * Also provides the tools needed to handle the Trie.
+ */
 public class Trie {
     
     private TrieNode root;
@@ -10,11 +14,16 @@ public class Trie {
         this.root = new TrieNode();
     }
     
-    public void add(List word) {
+    /**
+     * Adds a new branch to the trie.
+     * 
+     * @param substring new substring to be added
+     */
+    public void add(List substring) {
         HashMap<String, TrieNode> children = root.getChildren();
         
-        for (int i = 0 ; i < word.length() ; i++) {
-            String note = word.get(i);
+        for (int i = 0 ; i < substring.length() ; i++) {
+            String note = substring.get(i);
             TrieNode node;
             
             if (children.containsKey(note)) {
@@ -26,18 +35,25 @@ public class Trie {
             
             children = node.getChildren();
             
-            if (i == word.length() - 1) {
+            if (i == substring.length() - 1) {
                 node.setLeaf(true);
             }
         }
     }
     
-    public boolean find(List word) {
+    /**
+     * Checks if the given substring is in the trie.
+     * 
+     * @param substring substring to be found
+     * 
+     * @return true if found, false otherwise
+     */
+    public boolean find(List substring) {
         HashMap<String, TrieNode> children = root.getChildren();
         TrieNode node = null;
         
-        for (int i = 0 ; i < word.length() ; i++) {
-            String note = word.get(i);
+        for (int i = 0 ; i < substring.length() ; i++) {
+            String note = substring.get(i);
             
             if (children.containsKey(note)) {
                 node = children.get(note);
