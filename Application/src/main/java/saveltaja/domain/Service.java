@@ -1,6 +1,5 @@
 package saveltaja.domain;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import saveltaja.dao.Dao;
 
