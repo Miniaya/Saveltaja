@@ -48,7 +48,7 @@ public class Trie {
      * 
      * @return true if found, false otherwise
      */
-    public boolean find(List substring) {
+    private TrieNode searchNode(List substring) {
         HashMap<String, TrieNode> children = root.getChildren();
         TrieNode node = null;
         
@@ -59,15 +59,41 @@ public class Trie {
                 node = children.get(note);
                 children = node.getChildren();
             } else {
-                node = null;
-                break;
+                return null;
             }
         }
+        
+        return node;
+    }
+    
+    public boolean search(List substring) {
+        TrieNode node = searchNode(substring);
         
         if (node != null && node.isLeaf()) {
             return true;
         } else {
             return false;
+        }
+    }
+    
+    public List getLeafs(List prefix) {
+        List leafs = new List();
+        TrieNode node = searchNode(prefix);
+        
+        if (node == null || node.getChildren().isEmpty()) {
+            return null;
+        } else {
+            HashMap<String, TrieNode> children = node.getChildren();
+            
+            for (String key : children.keySet()) {
+                if (children.get(key).isLeaf()) {
+                    leafs.add(key);
+                } else {
+                    return null;
+                }
+            }
+            
+            return leafs;
         }
     }
 }

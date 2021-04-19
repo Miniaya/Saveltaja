@@ -2,8 +2,6 @@ package saveltaja.domain;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Random;
-import java.util.TreeMap;
 import saveltaja.dao.Dao;
 
 /**
@@ -12,12 +10,12 @@ import saveltaja.dao.Dao;
 public class Service {
     
     private Dao dao;
-    private TreeMap<String, List> substrings;
+    private Trie substrings;
     private HashSet<String> tones;
     
     public Service(Dao dao) {
         this.dao = dao;
-        this.substrings = new TreeMap();
+        this.substrings = new Trie();
         this.tones = new HashSet();
     }
     
@@ -45,11 +43,14 @@ public class Service {
     private void createSubstrings(int k) {
         List notes = dao.readAll();
         
-        for (int i = k - 1 ; i < notes.length() - 1 ; i++) {
-            String substring = String.join("", notes.subList(i - k + 1, i + 1));
+        for (int i = k ; i < notes.length() - 1 ; i++) {
+            // This is temporary solution
+            if (notes.get(i).equals(":")) {
+                continue;
+            }
+            List substring = notes.subList(i - k, i + 1);
             tones.add(notes.get(i));
-            substrings.putIfAbsent(substring, new List());
-            substrings.get(substring).add(notes.get(i + 1));
+            substrings.add(substring);
         }
         
     }
@@ -64,19 +65,20 @@ public class Service {
      */
     private List createMelody(int k, int duration) {
         List melody = new List();
-        List singleTones = new List(Arrays.stream(tones.toArray()).toArray(String[]::new));
-        
+        // This is temporary solution, I just needed it to work
+//        List singleTones = new List(Arrays.stream(tones.toArray()).toArray(String[]::new));
+        String[] singleTones = {"A4", "B4", "^C8", "^C8", "^D4", "B8", "A8", "G8", "A4", "A4", "B4"};
+
         for (int i = 0 ; i < k ; i++) {
             
-            melody.add(singleTones.getRandom());
+            melody.add(singleTones[i]);
         }
         
-        for (int i = k - 1 ; i < duration - 1 ; i++) {
-            String substring = String.join("", melody.subList(i - k + 1, i + 1));
-            List nextTones = substrings.floorEntry(substring).getValue();
-            Random r = new Random();
+        for (int i = k ; i < duration - 1 ; i++) {
+            List substring = melody.subList(i - k, i);
+            List nextTones = substrings.getLeafs(substring);
             
-            melody.add(nextTones.get(r.nextInt(nextTones.length())));
+            melody.add(nextTones.getRandom());
         }
         
         Translator translator = new Translator();

@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import saveltaja.dao.InMemoryDao;
 
 public class TrieTest {
     
@@ -45,8 +44,8 @@ public class TrieTest {
         this.trie.add(aList);
         this.trie.add(list);
         
-        assertTrue(trie.find(aList));
-        assertTrue(trie.find(list));
+        assertTrue(trie.search(aList));
+        assertTrue(trie.search(list));
     }
     
     @Test
@@ -58,13 +57,39 @@ public class TrieTest {
         this.trie.add(aList);
         this.trie.add(list);
         
-        assertTrue(trie.find(aList));
-        assertTrue(trie.find(list));
+        assertTrue(trie.search(aList));
+        assertTrue(trie.search(list));
     }
     
     @Test
     public void findReturnsFalseIfListNotInTrie() {
         String[] array = {".Eb4", "^C4", ".B#8"};
-        assertFalse(trie.find(new List(array)));
+        assertFalse(trie.search(new List(array)));
+    }
+    
+    @Test
+    public void nodesWithCorrectPerfixAreFound() {
+        String[] array = {".Eb4", "D2", ".B#8"};
+        String[] prefix = {".Eb4", "D2"};
+        
+        this.trie.add(list);
+        this.trie.add(new List(array));
+        
+        String[] correct = {"^F#8", ".B#8"};
+        
+        assertEquals(new List(correct), trie.getLeafs(new List(prefix)));
+    }
+    
+    @Test
+    public void tooShortPrefixReturnsNull() {
+        String[] array = {".Eb4"};
+        this.trie.add(list);
+        assertNull(trie.getLeafs(new List(array)));
+    }
+    
+    @Test
+    public void prefixWithoutLeafsReturnsNull() {
+        this.trie.add(list);
+        assertNull(trie.getLeafs(list));
     }
 }
