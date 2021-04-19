@@ -95,7 +95,7 @@ public class List {
      * 
      * @return specified sublist
      */
-    public String[] subList(int start, int end) {
+    public List subList(int start, int end) {
         String[] subArray = new String[end - start];
         int index = 0;
                 
@@ -104,7 +104,35 @@ public class List {
             index++;
         }
         
-        return subArray;
+        return new List(subArray);
+    }
+    
+    /**
+     * Checks if the wanted value is in the List
+     * 
+     * @param item item wanted to be found
+     * 
+     * @return -1 if not found, otherwise index of the item
+     */
+    public int find(String item) {
+        for (int i = 0 ; i < this.index ; i++) {
+            if (this.array[i].equals(item)) {
+                return i;
+            }
+        }
+        
+        return -1;
+    }
+    
+    /**
+     * Creates the sublist of the list, from start to the end of the list
+     * 
+     * @param start starting index of the sublist
+     * 
+     * @return specified sublist
+     */
+    public List subList(int start) {
+        return subList(start, this.index);
     }
     
     /**
@@ -124,6 +152,39 @@ public class List {
         }
         
         return this.array[i];
+    }
+    
+    /**
+     * Replaces the value from certain index with specified value
+     * 
+     * @param index index of the item to be replaced
+     * @param item replacement
+     */
+    public void put(int index, String item) {
+        this.array[index] = item;
+    }
+    
+    /**
+     * Deletes specified sublist, start included, end excluded
+     * 
+     * @param start starting index
+     * @param end ending index
+     */
+    public void delete(int start, int end) {
+        for (int i = end - 1 ; i >= start ; i--) {
+            this.array[i] = null;
+            index--;
+        }
+    }
+    
+    @Override
+    public String toString() {
+        String str = "";
+        
+        for (int i = 0 ; i < this.index ; i++) {
+            str += this.array[i];
+        }
+        return str;
     }
 
     /**

@@ -79,9 +79,9 @@ public class ListTest {
     @Test
     public void subListReturnsCorrectArray() {
         list.addAll(array);
-        String[] sub = list.subList(0, 2);
+        List sub = list.subList(0, 2);
         String[] correct = {"moi", "hei"};
-        assertEquals(correct, sub);
+        assertEquals(new List(correct), sub);
     }
     
     @Test
@@ -139,5 +139,41 @@ public class ListTest {
     public void listAndArrayNotEqual() {
         list.addAll(array);
         assertNotEquals(list, array);
+    }
+    
+    @Test
+    public void putReplacesWantedValue() {
+        list.addAll(array);
+        list.put(2, "tervehdys");
+        assertEquals("tervehdys", list.get(2));
+    }
+    
+    @Test
+    public void subListWithoutEndingArgumentIsCorrect() {
+        list.addAll(array);
+        List sub = list.subList(1);
+        assertEquals(2, sub.length());
+        assertEquals("hei", sub.get(0));
+        assertEquals("terve", sub.get(1));
+    }
+    
+    @Test
+    public void findReturnsRightIdex() {
+        list.addAll(array);
+        assertEquals(0, list.find("moi"));
+    }
+    
+    @Test
+    public void findReturnsCorrectWhenItemNotFound() {
+        list.addAll(array);
+        assertEquals(-1, list.find("tervehdys"));
+    }
+    
+    @Test
+    public void deleteWorks() {
+        list.addAll(array);
+        list.delete(1, list.length());
+        assertEquals(1, list.length());
+        assertEquals("moi", list.get(list.length() - 1));
     }
 }
