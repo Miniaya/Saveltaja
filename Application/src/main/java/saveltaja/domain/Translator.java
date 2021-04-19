@@ -3,7 +3,7 @@ package saveltaja.domain;
 public class Translator {
     
     /**
-     * Translates the tone format acceptable for .ly format
+     * Translates the tone format acceptable for LY format
      * 
      * @param tones list of tones to be translated
      * 
@@ -11,26 +11,26 @@ public class Translator {
      */
     public List translate(List tones) {
         List translated = new List();
-        StringBuilder bar = new StringBuilder();
+        String bar = "";
         
         for (int i = 0 ; i <= tones.length() ; i++) {
             if (i == tones.length()) {
                 translated.add(bar.toString().strip());
                 break;
             } else if (i != 0 && i % 4 == 0) {
-                translated.add(bar.toString().strip());
-                bar = new StringBuilder();
+                translated.add(bar);
+                bar = "";
             } 
             
-            StringBuilder temp = new StringBuilder(tones.get(i));
-            if (temp.charAt(0) != 'R') {
-                StringBuilder duration = separateDuration(temp);
+            List temp = new List(tones.get(i).split(""));
+            if (!temp.get(0).equals("R")) {
+                String duration = separateDuration(temp);
                 temp.delete(temp.length() - duration.length(), temp.length());
                 temp = replaceAccidentals(replacePitches(temp));
-                temp.append(duration);
+                temp.add(duration);
             }
             
-            bar.append(temp.toString().toLowerCase() + " ");
+            bar += temp.toString().toLowerCase() + " ";
         }
         return translated;
     }
@@ -42,13 +42,14 @@ public class Translator {
      * 
      * @return duration of the note in number form (and with dot)
      */
-    private StringBuilder separateDuration(StringBuilder tone) {
-        StringBuilder duration = new StringBuilder();
+    private String separateDuration(List tone) {
+        String duration;
         
-        if (tone.charAt(tone.length() - 1) == '.') {
-            duration.append(tone.substring(tone.length() - 2));
+        if (tone.get(tone.length() - 1).equals(".")) {
+            List subList = tone.subList(tone.length() - 2);
+            duration = subList.get(0) + subList.get(1);
         } else {
-            duration.append(tone.charAt(tone.length() - 1));
+            duration = tone.get(tone.length() - 1);
         }
         
         return duration;
@@ -61,13 +62,19 @@ public class Translator {
      * 
      * @return translated tone
      */
-    private StringBuilder replaceAccidentals(StringBuilder tone) {
+    private List replaceAccidentals(List tone) {
+        int index = tone.find("#");
         
-        if (tone.indexOf("#") > 0) {
-            tone.replace(1, 2, "is");
+        if (index > 0) {
+            tone.put(index, "is");
+            return tone;
             
-        } else if (tone.indexOf("b") > 0) {
-            tone.replace(1, 2, "es");
+        }
+        
+        index = tone.find("b");
+        
+        if (index > 0) {
+            tone.put(index, "es");
         }
         
         return tone;
@@ -80,20 +87,20 @@ public class Translator {
      * 
      * @return translated tone
      */
-    private StringBuilder replacePitches(StringBuilder tone) {
+    private List replacePitches(List tone) {
         
-        if (tone.charAt(0) == '^') {
-            tone.replace(0, 1, "");
-            tone.append("''");
+        if (tone.get(0).equals("^")) {
+            tone.put(0, "");
+            tone.add("''");
                 
-        } else if (tone.charAt(0) == '.') {
-            tone.replace(0, 1, "");
+        } else if (tone.get(0).equals(".")) {
+            tone.put(0, "");
                 
-        } else if (tone.charAt(0) == '*') {
-            tone.replace(0, 1, "");
-            tone.append("'''");
+        } else if (tone.get(0).equals("*")) {
+            tone.put(0, "");
+            tone.add("'''");
         } else {
-            tone.append("'");
+            tone.add("'");
         }
         
         return tone;
