@@ -85,21 +85,6 @@ public class ListTest {
     }
     
     @Test
-    public void randomItemIsFromList() {
-        list.addAll(array);
-        String random = list.getRandom();
-        boolean found = false;
-        
-        for (String a : array) {
-            if (a.equals(random)) {
-                found = true;
-            }
-        }
-        
-        assertTrue(found);
-    }
-    
-    @Test
     public void equalsRecognizesSameLists() {
         list.addAll(array);
         List another = new List(array);

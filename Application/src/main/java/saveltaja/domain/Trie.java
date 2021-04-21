@@ -1,5 +1,6 @@
 package saveltaja.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -9,9 +10,11 @@ import java.util.HashMap;
 public class Trie {
     
     private TrieNode root;
+    private RandomGenerator random;
     
     public Trie() {
         this.root = new TrieNode();
+        this.random = new RandomGenerator();
     }
     
     /**
@@ -96,4 +99,21 @@ public class Trie {
             return leafs;
         }
     }
+    
+    public String getFirst() {
+        HashMap<String, TrieNode> children = root.getChildren();
+        String[] notes = Arrays.stream(children.keySet().toArray()).toArray(String[]::new);
+        String rand = notes[random.getRandom(notes.length)];
+//        System.out.println(rand);
+        return rand;
+    }
+    
+    public String getNext(List prefix) {
+        TrieNode node = searchNode(prefix);
+        String[] notes = Arrays.stream(node.getChildren().keySet().toArray()).toArray(String[]::new);
+        String rand = notes[random.getRandom(notes.length)];
+//        System.out.println(rand);
+        return rand;
+    }
+    
 }

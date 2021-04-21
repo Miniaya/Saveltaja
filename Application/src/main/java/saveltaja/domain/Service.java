@@ -43,10 +43,6 @@ public class Service {
         List notes = dao.readAll();
         
         for (int i = k ; i < notes.length() - 1 ; i++) {
-            // This is temporary solution
-            if (notes.get(i).equals(":")) {
-                continue;
-            }
             List substring = notes.subList(i - k, i + 1);
             tones.add(notes.get(i));
             substrings.add(substring);
@@ -64,20 +60,20 @@ public class Service {
      */
     private List createMelody(int k, int duration) {
         List melody = new List();
-        // This is temporary solution, I just needed it to work
-//        List singleTones = new List(Arrays.stream(tones.toArray()).toArray(String[]::new));
-        String[] singleTones = {"A4", "B4", "^C8", "^C8", "^D4", "B8", "A8", "G8", "A4", "A4", "B4"};
+        
+        melody.add(substrings.getFirst());
+//        System.out.println("kierros 0");
 
-        for (int i = 0 ; i < k ; i++) {
-            
-            melody.add(singleTones[i]);
+        for (int i = 1 ; i < k ; i++) {
+//            System.out.println("kierros " + i);
+            melody.add(substrings.getNext(melody));
         }
         
-        for (int i = k ; i < duration - 1 ; i++) {
+        for (int i = k ; i < duration ; i++) {
             List substring = melody.subList(i - k, i);
-            List nextTones = substrings.getLeafs(substring);
             
-            melody.add(nextTones.getRandom());
+//            System.out.println("kierros " + i);
+            melody.add(substrings.getNext(substring));
         }
         
         Translator translator = new Translator();

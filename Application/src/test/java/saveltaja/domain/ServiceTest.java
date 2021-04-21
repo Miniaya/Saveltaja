@@ -34,10 +34,10 @@ public class ServiceTest {
     public void tearDown() {
     }
     
-//    @Test
-//    public void durationIsCorrect() {
-//        s.createNotes(2, 6);
-//        int len = dao.readWritten().get(0).split(" ").length + dao.readWritten().get(1).split(" ").length;
-//        assertEquals(6, len);
-//    }
+    @Test
+    public void durationIsCorrect() {
+        s.createNotes(2, 6);
+        int len = dao.readWritten().get(0).split(" ").length + dao.readWritten().get(1).split(" ").length;
+        assertEquals(6, len);
+    }
 }

@@ -136,25 +136,6 @@ public class List {
     }
     
     /**
-     * Returns one random item from the list
-     * 
-     * @return random item from the list
-     */
-    public String getRandom() {
-        int i = -1;
-                
-        while(true) {
-            i = (int) System.nanoTime() % this.index;
-            
-            if (i >= 0 && i < this.index) {
-                break;
-            }
-        }
-        
-        return this.array[i];
-    }
-    
-    /**
      * Replaces the value from certain index with specified value
      * 
      * @param index index of the item to be replaced

@@ -36,7 +36,7 @@ public class FileDaoTest {
     @Test
     public void readAllGetsAllNotesFromFile() {
         List read = dao.readAll();
-        assertEquals(22, read.length());
+        assertEquals(19, read.length());
     }
     
     @Test

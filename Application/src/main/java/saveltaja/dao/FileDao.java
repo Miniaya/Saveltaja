@@ -54,7 +54,6 @@ public class FileDao implements Dao {
                 }
                 
                 read.addAll(splitLine);
-                read.add(":");
             }
             
         } catch (FileNotFoundException ex) {
