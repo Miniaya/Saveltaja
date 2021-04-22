@@ -6,18 +6,18 @@ import java.util.Arrays;
  * Provides the list data structure where the notes are stored. Also provides tool for
  * handling the list and items in the list.
  */
-public class List {
+public class List<T> {
     
-    private String[] array;
+    private Object[] array;
     private int index;
     
-    public List(String[] array) {
+    public List(Object[] array) {
         this.array = array;
         this.index = array.length;
     }
     
     public List() {
-        this.array = new String[16];
+        this.array = new Object[16];
         this.index = 0;
     }
     
@@ -26,7 +26,7 @@ public class List {
      * 
      * @param item item to be added to the list
      */
-    public void add(String item) {
+    public void add(T item) {
         if (this.index == array.length) {
             this.array = expandArray(this.array);
         }
@@ -40,9 +40,9 @@ public class List {
      * 
      * @param array items to be added to the list
      */
-    public void addAll(String[] array) {
-        for (String item : array) {
-            this.add(item);
+    public void addAll(Object[] array) {
+        for (Object item : array) {
+            this.add((T) item);
         }
     }
     
@@ -53,8 +53,8 @@ public class List {
      * 
      * @return expanded array with items from the old list in it
      */
-    private String[] expandArray(String[] oldArray) {
-        String[] newArray = new String[oldArray.length * 2];
+    private Object[] expandArray(Object[] oldArray) {
+        Object[] newArray = new Object[oldArray.length * 2];
         
         for (int i = 0 ; i < oldArray.length ; i++) {
             newArray[i] = oldArray[i];
@@ -70,12 +70,12 @@ public class List {
      * 
      * @return the item from specified index
      */
-    public String get(int index) {
+    public T get(int index) {
         if (index >= this.index || this.index == 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
         
-        return this.array[index];
+        return (T) this.array[index];
     }
     
     /**
@@ -96,7 +96,7 @@ public class List {
      * @return specified sublist
      */
     public List subList(int start, int end) {
-        String[] subArray = new String[end - start];
+        Object[] subArray = new Object[end - start];
         int index = 0;
                 
         for (int i = start ; i < end ; i++) {
@@ -114,7 +114,7 @@ public class List {
      * 
      * @return -1 if not found, otherwise index of the item
      */
-    public int find(String item) {
+    public int find(T item) {
         for (int i = 0 ; i < this.index ; i++) {
             if (this.array[i].equals(item)) {
                 return i;
@@ -141,7 +141,7 @@ public class List {
      * @param index index of the item to be replaced
      * @param item replacement
      */
-    public void put(int index, String item) {
+    public void put(int index, T item) {
         this.array[index] = item;
     }
     

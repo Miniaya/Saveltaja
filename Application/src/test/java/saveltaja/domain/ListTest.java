@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class ListTest {
     
-    private List list;
+    private List<String> list;
     private String[] array = {"moi", "hei", "terve"};
     
     public ListTest() {
@@ -79,7 +79,7 @@ public class ListTest {
     @Test
     public void subListReturnsCorrectArray() {
         list.addAll(array);
-        List sub = list.subList(0, 2);
+        List<String> sub = list.subList(0, 2);
         String[] correct = {"moi", "hei"};
         assertEquals(new List(correct), sub);
     }
@@ -95,7 +95,7 @@ public class ListTest {
     public void listsWithSameLengthNotEqual() {
         list.addAll(array);
         String[] anotherArray = {"moi", "hei", "hei"};
-        List another = new List(anotherArray);
+        List<String> another = new List(anotherArray);
         assertNotEquals(list, another);
     }
     
@@ -103,7 +103,7 @@ public class ListTest {
     public void shorterListNotEqual() {
         list.addAll(array);
         String[] anotherArray = {"moi", "hei"};
-        List another = new List(anotherArray);
+        List<String> another = new List(anotherArray);
         assertNotEquals(list, another);
     }
     
@@ -111,7 +111,7 @@ public class ListTest {
     public void longerListNotEqual() {
         list.addAll(array);
         String[] anotherArray = {"moi", "hei", "terve", "hellurei"};
-        List another = new List(anotherArray);
+        List<String> another = new List(anotherArray);
         assertNotEquals(list, another);
     }
     

@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class TranslatorTest {
     
     private Translator translator;
-    private List translated;
+    private List<String> translated;
     
     public TranslatorTest() {
         translator = new Translator();
@@ -42,7 +42,7 @@ public class TranslatorTest {
     @Test
     public void returnsCorrectNumberOfNotes() {
         String[] array = {".A", "Bb"};
-        List tr = translator.translate(new List(array));
+        List<String> tr = translator.translate(new List(array));
         
         assertEquals(2, tr.get(0).split(" ").length);
     }

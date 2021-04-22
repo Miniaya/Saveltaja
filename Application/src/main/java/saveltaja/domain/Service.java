@@ -1,6 +1,5 @@
 package saveltaja.domain;
 
-import java.util.HashSet;
 import saveltaja.dao.Dao;
 
 /**
@@ -10,12 +9,10 @@ public class Service {
     
     private Dao dao;
     private Trie substrings;
-    private HashSet<String> tones;
     
     public Service(Dao dao) {
         this.dao = dao;
         this.substrings = new Trie();
-        this.tones = new HashSet();
     }
     
     /**
@@ -40,14 +37,12 @@ public class Service {
      * @param k  length of the substring provided by user
      */
     private void createSubstrings(int k) {
-        List notes = dao.readAll();
+        List<String> notes = dao.readAll();
         
         for (int i = k ; i < notes.length() - 1 ; i++) {
             List substring = notes.subList(i - k, i + 1);
-            tones.add(notes.get(i));
             substrings.add(substring);
         }
-        
     }
     
     /**

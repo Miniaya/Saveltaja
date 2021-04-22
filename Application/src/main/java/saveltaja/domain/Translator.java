@@ -9,8 +9,8 @@ public class Translator {
      * 
      * @return list containing four translated notes on one element
      */
-    public List translate(List tones) {
-        List translated = new List();
+    public List translate(List<String> tones) {
+        List<String> translated = new List();
         String bar = "";
         
         for (int i = 0 ; i <= tones.length() ; i++) {
@@ -42,11 +42,11 @@ public class Translator {
      * 
      * @return duration of the note in number form (and with dot)
      */
-    private String separateDuration(List tone) {
+    private String separateDuration(List<String> tone) {
         String duration;
         
         if (tone.get(tone.length() - 1).equals(".")) {
-            List subList = tone.subList(tone.length() - 2);
+            List<String> subList = tone.subList(tone.length() - 2);
             duration = subList.get(0) + subList.get(1);
         } else {
             duration = tone.get(tone.length() - 1);

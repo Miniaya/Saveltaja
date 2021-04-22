@@ -1,8 +1,5 @@
 package saveltaja.domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 /**
  * Provides a Trie data structure for storing the substrings of the melody.
  * Also provides the tools needed to handle the Trie.
@@ -22,8 +19,8 @@ public class Trie {
      * 
      * @param substring new substring to be added
      */
-    public void add(List substring) {
-        HashMap<String, TrieNode> children = root.getChildren();
+    public void add(List<String> substring) {
+        Dictionary<String, TrieNode> children = root.getChildren();
         
         for (int i = 0 ; i < substring.length() ; i++) {
             String note = substring.get(i);
@@ -51,8 +48,8 @@ public class Trie {
      * 
      * @return true if found, false otherwise
      */
-    private TrieNode searchNode(List substring) {
-        HashMap<String, TrieNode> children = root.getChildren();
+    private TrieNode searchNode(List<String> substring) {
+        Dictionary<String, TrieNode> children = root.getChildren();
         TrieNode node = null;
         
         for (int i = 0 ; i < substring.length() ; i++) {
@@ -86,9 +83,11 @@ public class Trie {
         if (node == null || node.getChildren().isEmpty()) {
             return null;
         } else {
-            HashMap<String, TrieNode> children = node.getChildren();
+            Dictionary<String, TrieNode> children = node.getChildren();
             
-            for (String key : children.keySet()) {
+            for (int i = 0 ; i < children.keySet().length() ; i++) {
+                String key = children.keySet().get(i);
+                
                 if (children.get(key).isLeaf()) {
                     leafs.add(key);
                 } else {
@@ -101,17 +100,17 @@ public class Trie {
     }
     
     public String getFirst() {
-        HashMap<String, TrieNode> children = root.getChildren();
-        String[] notes = Arrays.stream(children.keySet().toArray()).toArray(String[]::new);
-        String rand = notes[random.getRandom(notes.length)];
+        Dictionary<String, TrieNode> children = root.getChildren();
+        List<String> notes = children.keySet();
+        String rand = notes.get(random.getRandom(notes.length()));
 //        System.out.println(rand);
         return rand;
     }
     
     public String getNext(List prefix) {
         TrieNode node = searchNode(prefix);
-        String[] notes = Arrays.stream(node.getChildren().keySet().toArray()).toArray(String[]::new);
-        String rand = notes[random.getRandom(notes.length)];
+        List<String> notes = node.getChildren().keySet();
+        String rand = notes.get(random.getRandom(notes.length()));
 //        System.out.println(rand);
         return rand;
     }

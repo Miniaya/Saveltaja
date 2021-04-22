@@ -1,29 +1,27 @@
 package saveltaja.domain;
 
-import java.util.HashMap;
-
 /**
  * A tool used to store trie branches.
  */
 public class TrieNode {
     
     private String node;
-    private HashMap<String, TrieNode> children;
+    private Dictionary<String, TrieNode> children;
     private boolean isLeaf;
     
     public TrieNode() {
-        children = new HashMap();
+        children = new Dictionary();
     }
     
     public TrieNode(String node) {
         this.node = node;
-        children = new HashMap();
+        children = new Dictionary();
     }
     
     /**
      * @return all children of the node
      */
-    public HashMap<String, TrieNode> getChildren() {
+    public Dictionary getChildren() {
         return this.children;
     }
     
