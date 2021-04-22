@@ -38,7 +38,6 @@ public class TrieTest {
     @Test
     public void addedNotesWithDifferentStartingNoteCanBeFound() {
         String[] array = {"F2", "^C4", ".B#8"};
-        
         List aList = new List(array);
         
         this.trie.add(aList);
@@ -91,5 +90,28 @@ public class TrieTest {
     public void prefixWithoutLeafsReturnsNull() {
         this.trie.add(list);
         assertNull(trie.getLeafs(list));
+    }
+    
+    @Test
+    public void firstNodeIsFromFirstSetOfNodes() {
+        String[] array = {"F2", "^C4", ".B#8"};
+        
+        this.trie.add(new List(array));
+        this.trie.add(list);
+        
+        String first = trie.getFirst();
+        
+        assertTrue(first.equals("F2") || first.equals(".Eb4"));
+    }
+    
+    @Test
+    public void getNextReturnsCorrect() {
+        String[] array = {"F2", "^C4", ".B#8"};
+        
+        this.trie.add(new List(array));
+        this.trie.add(list);
+        
+        String next = trie.getNext(new List(new String[] {"F2"}));
+        assertEquals("^C4", next);
     }
 }
