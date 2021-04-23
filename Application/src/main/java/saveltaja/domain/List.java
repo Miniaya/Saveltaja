@@ -8,16 +8,16 @@ import java.util.Arrays;
  */
 public class List<T> {
     
-    private Object[] array;
+    private T[] array;
     private int index;
     
-    public List(Object[] array) {
+    public List(T[] array) {
         this.array = array;
         this.index = array.length;
     }
     
     public List() {
-        this.array = new Object[16];
+        this.array = (T[]) new Object[16];
         this.index = 0;
     }
     
@@ -40,7 +40,7 @@ public class List<T> {
      * 
      * @param array items to be added to the list
      */
-    public void addAll(Object[] array) {
+    public void addAll(T[] array) {
         for (Object item : array) {
             this.add((T) item);
         }
@@ -53,8 +53,8 @@ public class List<T> {
      * 
      * @return expanded array with items from the old list in it
      */
-    private Object[] expandArray(Object[] oldArray) {
-        Object[] newArray = new Object[oldArray.length * 2];
+    private T[] expandArray(T[] oldArray) {
+        T[] newArray = (T[]) new Object[oldArray.length * 2];
         
         for (int i = 0 ; i < oldArray.length ; i++) {
             newArray[i] = oldArray[i];

@@ -66,7 +66,14 @@ public class Trie {
         return node;
     }
     
-    public boolean search(List substring) {
+    /**
+     * Checks if the whole substring is in the trie
+     * 
+     * @param substring 
+     * 
+     * @return true if found, false otherwise
+     */
+    public boolean search(List<String> substring) {
         TrieNode node = searchNode(substring);
         
         if (node != null && node.isLeaf()) {
@@ -76,7 +83,14 @@ public class Trie {
         }
     }
     
-    public List getLeafs(List prefix) {
+    /**
+     * Gets leafs of the given prefix
+     * 
+     * @param prefix
+     * 
+     * @return List of leafs
+     */
+    public List<String> getLeafs(List prefix) {
         List leafs = new List();
         TrieNode node = searchNode(prefix);
         
@@ -99,6 +113,11 @@ public class Trie {
         }
     }
     
+    /**
+     * Gets and returns one of the top level nodes
+     * 
+     * @return one note
+     */
     public String getFirst() {
         Dictionary<String, TrieNode> children = root.getChildren();
         List<String> notes = children.keySet();
@@ -107,6 +126,13 @@ public class Trie {
         return rand;
     }
     
+    /**
+     * Gets and returns one of the next level nodes from given prefix
+     * 
+     * @param prefix first nodes
+     * 
+     * @return next note
+     */
     public String getNext(List prefix) {
         TrieNode node = searchNode(prefix);
         List<String> notes = node.getChildren().keySet();
