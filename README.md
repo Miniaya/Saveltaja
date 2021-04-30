@@ -10,3 +10,4 @@ Composer made for course Data structures and algorithms project in University of
 * [Week 3](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report3.md)
 * [Week 4](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report4.md)
 * [Week 5](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report5.md)
+* [Week 6](https://github.com/Miniaya/Saveltaja/blob/main/Documentation/weekly_report6.md)
