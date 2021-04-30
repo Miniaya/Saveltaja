@@ -6,10 +6,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import saveltaja.domain.List;
+import saveltaja.domain.RandomGenerator;
 
 /**
  * Provides tools for reading and writing files
@@ -18,10 +21,12 @@ public class FileDao implements Dao {
     
     private File file;
     private boolean[] choices;
+    private String noteDir;
     
     public FileDao (String fileName) {
         this.file = new File(fileName);
         this.choices = new boolean[3];
+        this.noteDir = System.getProperty("user.dir") + "/created_notes/";
     }
     
     /**
@@ -73,7 +78,13 @@ public class FileDao implements Dao {
      */
     @Override
     public String writeNotes(List notes) {
-        return writeNotes(notes, "mun");
+        String[] adjectives = {"blue", "white", "black", "red", "beautiful", "loving", 
+            "happy", "inconsistent", "stressed", "loud", "dark", "light", "chubby", "defeated", "petite", "nervous", "tiny", "witty"};
+        String[] substantives = {"car", "cat", "sea", "wave", "sock", "glass", "box", 
+            "ruler", "chicken", "duck", "pillow", "phone", "candles", "balloon", "plant", "gear", "keys", "window", "hair"};
+        RandomGenerator random = new RandomGenerator();
+        String generatedName = adjectives[random.getRandom(adjectives.length)] + "_" + substantives[random.getRandom(substantives.length)];
+        return writeNotes(notes, generatedName);
     }
     
     /**
@@ -88,7 +99,7 @@ public class FileDao implements Dao {
         File noteFile = createNewFile(fileName);
         
         try {
-            FileWriter writer = new FileWriter(noteFile.getName());
+            FileWriter writer = new FileWriter(new File(noteDir, noteFile.getName()));
             writer.write("\\version \"2.18.2\"\n{\n");
             
             for (int i = 0 ; i < notes.length() ; i++) {
@@ -235,7 +246,7 @@ public class FileDao implements Dao {
      */
     private File createNewFile(String fileName) {
         try {
-            File noteFile = new File(fileName + ".ly");
+            File noteFile = new File(noteDir,fileName + ".ly");
             noteFile.createNewFile();
             
             return noteFile;
