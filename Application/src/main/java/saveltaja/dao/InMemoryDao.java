@@ -7,8 +7,8 @@ import saveltaja.domain.List;
  */
 public class InMemoryDao implements Dao {
     
-    private List notes;
-    private List written;
+    private List<String> notes;
+    private List<String> written;
     
     public InMemoryDao() {
         String[] array = {"A","B",".C","E#","^D","G","^F","^D#","D","^C","Bb","^D#","^D","Eb",".B","^C",".A","F","G#"};
@@ -31,7 +31,7 @@ public class InMemoryDao implements Dao {
         return true;
     }
     
-    public List readWritten() {
+    public List<String> readWritten() {
         return written;
     }
     
