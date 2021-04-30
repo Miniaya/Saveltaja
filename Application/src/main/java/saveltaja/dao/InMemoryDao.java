@@ -26,9 +26,9 @@ public class InMemoryDao implements Dao {
     }
     
     @Override
-    public boolean writeNotes(List notes) {
+    public String writeNotes(List notes) {
         written = notes;
-        return true;
+        return "Success";
     }
     
     public List<String> readWritten() {

@@ -72,7 +72,7 @@ public class FileDao implements Dao {
      * @return true whether the writing succeeded, false otherwise
      */
     @Override
-    public boolean writeNotes(List notes) {
+    public String writeNotes(List notes) {
         return writeNotes(notes, "mun");
     }
     
@@ -84,7 +84,7 @@ public class FileDao implements Dao {
      * 
      * @return  true whether the writing succeded, false otherwise
      */
-    public boolean writeNotes(List notes, String fileName) {
+    public String writeNotes(List notes, String fileName) {
         File noteFile = createNewFile(fileName);
         
         try {
@@ -100,10 +100,10 @@ public class FileDao implements Dao {
             
             checkChoices(noteFile);
             
-            return true;
+            return noteFile.getName();
         } catch (IOException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return null;
         }
     }
     
@@ -236,18 +236,12 @@ public class FileDao implements Dao {
     private File createNewFile(String fileName) {
         try {
             File noteFile = new File(fileName + ".ly");
-            
-            if (noteFile.createNewFile()) {
-                System.out.println("Notes can be found from " + noteFile.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
+            noteFile.createNewFile();
             
             return noteFile;
             
         } catch (IOException ex) {
             Logger.getLogger(FileDao.class.getName()).log(Level.SEVERE, null, ex);
-            
             return null;
         }
         

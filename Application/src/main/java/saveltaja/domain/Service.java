@@ -24,10 +24,14 @@ public class Service {
         dao.setChoices(choices);
     }
     
-    public void createNotes(int k, int duration) {
-        createSubstrings(k);
+    public String createNotes(int k, int duration) {
+        if (!createSubstrings(k)) {
+            return null;
+        }
+        
         List melody = createMelody(k, duration);
-        dao.writeNotes(melody);
+        
+        return dao.writeNotes(melody);
     }
     
     /**
@@ -36,13 +40,19 @@ public class Service {
      * 
      * @param k  length of the substring provided by user
      */
-    private void createSubstrings(int k) {
+    private boolean createSubstrings(int k) {
         List<String> notes = dao.readAll();
+        
+        if (notes == null) {
+            return false;
+        }
         
         for (int i = k ; i < notes.length() - 1 ; i++) {
             List substring = notes.subList(i - k, i + 1);
             substrings.add(substring);
         }
+        
+        return true;
     }
     
     /**

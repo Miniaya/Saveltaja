@@ -49,6 +49,6 @@ public class FileDaoTest {
     public void writeNotesSucceed() {
         String[] array = {"A'4 Cis''8 B'8 D4", "F'2 Ees'4 Des'4 B2"};
         List toWrite = new List(array);
-        assertTrue(dao.writeNotes(toWrite, "test"));
+        assertEquals("test.ly", dao.writeNotes(toWrite, "test"));
     }
 }

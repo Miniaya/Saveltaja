@@ -1,5 +1,8 @@
 package saveltaja.ui;
 
+import java.io.FileInputStream;
+import java.util.Properties;
+
 import saveltaja.dao.FileDao;
 import saveltaja.domain.Service;
 import saveltaja.io.IO;
@@ -13,7 +16,15 @@ public class CLUI {
     private int duration;
     
     public CLUI (IO io) {
-        this.service = new Service(new FileDao("notes.csv"));
+        try {
+            Properties properties = new Properties();
+            properties.load(new FileInputStream("config.properties"));
+            String noteFile = properties.getProperty("noteFile");
+            this.service = new Service(new FileDao(noteFile));
+        } catch (Exception e) {
+            System.out.println("Something went wrong with notefile");
+        }
+        
         this.io = io;
         this.choices = new boolean[3];
     }
@@ -26,18 +37,22 @@ public class CLUI {
             "-(_|_)---- |_  |__| |  | |   |__| __| |__ | \\  ------ \n" +
             "---J------------------------------------------------- \n"
         );
-        
         markovChain();
         duration();
         pdfChoice();
         musicxmlChoice();
-
         if (choices[1]) {
             musescoreChoice();
         }
         
         service.setChoices(choices);
-        service.createNotes(k, duration);
+        String file = service.createNotes(k, duration);
+        
+        if (file != null) {
+            io.print("Saved notes to file " + file);
+        } else {
+            io.print("Couldn't save notes");
+        }
     }
     
     private void markovChain() {
@@ -45,14 +60,14 @@ public class CLUI {
             try {
                 k = Integer.valueOf(io.readLine("Give the length of the Markov chain: "));
             } catch (NumberFormatException e) {
-                System.out.println("Chain can't be negative or non numeric");
+                io.print("Chain can't be negative or non numeric");
                 continue;
             }
             
             if (k > 0) {
                 break;
             } else {
-                System.out.println("Chain can't be negative or non numeric");
+                io.print("Chain can't be negative or non numeric");
             }
         }
     }
@@ -62,14 +77,14 @@ public class CLUI {
             try {
                 duration = Integer.valueOf(io.readLine("Give the number of tones in melody: "));
             } catch (NumberFormatException e) {
-                System.out.println("Duration can't be negative or non numeric");
+                io.print("Duration can't be negative or non numeric");
                 continue;
             }
             
             if (duration > 0) {
                 break;
             } else {
-                System.out.println("Duration can't be negative or non numeric");
+                io.print("Duration can't be negative or non numeric");
             }
         }
     }

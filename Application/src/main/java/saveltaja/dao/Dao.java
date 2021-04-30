@@ -6,7 +6,7 @@ public interface Dao {
     
     List readAll();
     
-    boolean writeNotes(List notes);
+    String writeNotes(List notes);
     
     void setChoices(boolean[] choices);
     
