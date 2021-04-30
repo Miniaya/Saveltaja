@@ -79,11 +79,14 @@ public class FileDao implements Dao {
     @Override
     public String writeNotes(List notes) {
         String[] adjectives = {"blue", "white", "black", "red", "beautiful", "loving", 
-            "happy", "inconsistent", "stressed", "loud", "dark", "light", "chubby", "defeated", "petite", "nervous", "tiny", "witty"};
+            "happy", "inconsistent", "stressed", "loud", "dark", "light", "chubby", 
+            "defeated", "petite", "nervous", "tiny", "witty"};
         String[] substantives = {"car", "cat", "sea", "wave", "sock", "glass", "box", 
-            "ruler", "chicken", "duck", "pillow", "phone", "candles", "balloon", "plant", "gear", "keys", "window", "hair"};
+            "ruler", "chicken", "duck", "pillow", "phone", "candles", "balloon", 
+            "plant", "gear", "keys", "window", "hair"};
         RandomGenerator random = new RandomGenerator();
-        String generatedName = adjectives[random.getRandom(adjectives.length)] + "_" + substantives[random.getRandom(substantives.length)];
+        String generatedName = adjectives[random.getRandom(adjectives.length)] 
+                + "_" + substantives[random.getRandom(substantives.length)];
         return writeNotes(notes, generatedName);
     }
     
@@ -233,7 +236,7 @@ public class FileDao implements Dao {
      * @param fileName file to be deleted
      */
     public void deleteFile(String fileName) {
-        File file = new File(fileName);
+        File file = new File(noteDir, fileName);
         file.delete();
     }
     
