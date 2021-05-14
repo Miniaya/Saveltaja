@@ -122,7 +122,6 @@ public class Trie {
         Dictionary<String, TrieNode> children = root.getChildren();
         List<String> notes = children.keySet();
         String rand = notes.get(random.getRandom(notes.length()));
-//        System.out.println(rand);
         return rand;
     }
     
@@ -137,7 +136,6 @@ public class Trie {
         TrieNode node = searchNode(prefix);
         List<String> notes = node.getChildren().keySet();
         String rand = notes.get(random.getRandom(notes.length()));
-//        System.out.println(rand);
         return rand;
     }
     

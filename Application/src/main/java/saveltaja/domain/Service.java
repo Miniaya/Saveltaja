@@ -65,19 +65,14 @@ public class Service {
      */
     private List createMelody(int k, int duration) {
         List melody = new List();
-        
         melody.add(substrings.getFirst());
-//        System.out.println("kierros 0");
 
         for (int i = 1 ; i < k ; i++) {
-//            System.out.println("kierros " + i);
             melody.add(substrings.getNext(melody));
         }
         
         for (int i = k ; i < duration ; i++) {
             List substring = melody.subList(i - k, i);
-            
-//            System.out.println("kierros " + i);
             melody.add(substrings.getNext(substring));
         }
         
