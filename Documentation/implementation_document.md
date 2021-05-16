@@ -58,3 +58,14 @@ Java does not have a trie structure on its own. It is very useful to store lette
    **getLeafs**: gets next possible nodes with given prefix, O(L) L = length of the prefix  
    **getFirst**: returns one node from the top of the trie, O(1)  
    **getNext**: returns one possible node with given prefix, O(L)  
+
+## Possible improvements
+
+There are a couple things I would like to fix or improve:
+* I Found some bug with the getNext method I was unable to fix
+* Cleaner code (solid naming etc.)
+* User could decide the duration of the bar (e.g. 4/4 or 3/4)
+* The duration of the notes is generated separately from the pitch
+* More songs to the source material
+* Better bar length/size control
+* Instead of asking the length of the song in notes, the program could ask the length in bars
