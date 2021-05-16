@@ -16,21 +16,9 @@ public class FileDaoTest {
         dao = new FileDao("testNotes.csv");
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
     @AfterClass
     public static void tearDownClass() {
         dao.deleteFile("test.ly");
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     @Test

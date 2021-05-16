@@ -12,27 +12,11 @@ public class TrieTest {
     private Trie trie;
     private List list;
     
-    public TrieTest() {
-        
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         String[] array = {".Eb4", "D2", "^F#8"};
         this.trie = new Trie();
         this.list = new List(array);
-    }
-    
-    @After
-    public void tearDown() {
     }
     
     @Test

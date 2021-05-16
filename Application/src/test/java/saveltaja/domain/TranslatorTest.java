@@ -16,22 +16,10 @@ public class TranslatorTest {
         translator = new Translator();
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         String[] array = {".A4.", "Bb8", "^C#8", "*Db4", "Eb8", "^F2", ".G#4", "*B2"};
         translated = translator.translate(new List(array));
-    }
-    
-    @After
-    public void tearDown() {
     }
     
     @Test

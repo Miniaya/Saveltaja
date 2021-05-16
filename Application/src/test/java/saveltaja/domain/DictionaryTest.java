@@ -11,25 +11,9 @@ public class DictionaryTest {
     
     private Dictionary<String, String> dic;
     
-    public DictionaryTest() {
-        
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         dic = new Dictionary();
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     @Test

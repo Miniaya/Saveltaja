@@ -12,25 +12,9 @@ public class ListTest {
     private List<String> list;
     private String[] array = {"moi", "hei", "terve"};
     
-    public ListTest() {
-
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         list = new List();
-    }
-    
-    @After
-    public void tearDown() {
     }
     
     @Test
