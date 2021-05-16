@@ -61,7 +61,7 @@ Java does not have a trie structure on its own. It is very useful to store lette
 
 ## Possible improvements
 
-There are a couple things I would like to fix or improve:
+There are a couple things I would like to fix or improve in this project:
 * I Found some bug with the getNext method I was unable to fix
 * Cleaner code (solid naming etc.)
 * User could decide the duration of the bar (e.g. 4/4 or 3/4)
